@@ -2,9 +2,9 @@
 
 Dokumen ini berisi checklist lengkap antara requirements tugas dengan implementasi yang sudah dibuat.
 
-**Nama:** [Nama Mahasiswa]  
+**Nama:** Hylmi Wahyudi  
 **NIM:** 11221023  
-**Tanggal:** Desember 2024
+**Tanggal:** Desember 2025
 
 ---
 
