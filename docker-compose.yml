@@ -1,0 +1,127 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database - Persistent Storage
+  storage:
+    image: postgres:16-alpine
+    container_name: uas_storage
+    environment:
+      POSTGRES_DB: logaggregator
+      POSTGRES_USER: aggregator_user
+      POSTGRES_PASSWORD: aggregator_pass
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./aggregator/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - aggregator_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aggregator_user -d logaggregator"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis Broker - Message Queue
+  broker:
+    image: redis:7-alpine
+    container_name: uas_broker
+    command: redis-server --appendonly yes
+    volumes:
+      - broker_data:/data
+    networks:
+      - aggregator_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Aggregator Service - Main API & Event Processing
+  aggregator:
+    build:
+      context: ./aggregator
+      dockerfile: Dockerfile
+    image: uas-aggregator:latest
+    container_name: uas_aggregator
+    depends_on:
+      storage:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://aggregator_user:aggregator_pass@storage:5432/logaggregator
+      - BROKER_URL=redis://broker:6379/0
+      - WORKER_COUNT=4
+      - LOG_LEVEL=INFO
+    ports:
+      - "8080:8080"
+    networks:
+      - aggregator_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # Publisher Service - Event Generator/Simulator
+  publisher:
+    build:
+      context: ./publisher
+      dockerfile: Dockerfile
+    image: uas-publisher:latest
+    container_name: uas_publisher
+    depends_on:
+      aggregator:
+        condition: service_healthy
+    environment:
+      - TARGET_URL=http://aggregator:8080
+      - BROKER_URL=redis://broker:6379/0
+      - EVENT_COUNT=1000
+      - DUPLICATE_RATE=0.3
+      - BATCH_SIZE=50
+      - DELAY_MS=10
+    networks:
+      - aggregator_network
+    restart: "no"
+    profiles:
+      - publisher
+
+  # Worker Service - Additional Consumer Workers for Concurrency Testing
+  worker:
+    build:
+      context: ./aggregator
+      dockerfile: Dockerfile
+    image: uas-aggregator:latest
+    environment:
+      - DATABASE_URL=postgresql://aggregator_user:aggregator_pass@storage:5432/logaggregator
+      - BROKER_URL=redis://broker:6379/0
+      - WORKER_MODE=true
+      - WORKER_COUNT=2
+      - LOG_LEVEL=INFO
+    depends_on:
+      storage:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+      aggregator:
+        condition: service_healthy
+    networks:
+      - aggregator_network
+    deploy:
+      replicas: 2
+    restart: unless-stopped
+    profiles:
+      - workers
+
+networks:
+  aggregator_network:
+    driver: bridge
+    internal: false  # Allow localhost access for demo
+
+volumes:
+  pg_data:
+    name: uas_pg_data
+  broker_data:
+    name: uas_broker_data
