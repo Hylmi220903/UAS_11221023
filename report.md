@@ -2,7 +2,7 @@
 
 **Nama:** Hylmi Wahyudi  
 **NIM:** 11221023  
-**Mata Kuliah:** Sistem Terdistribusi dan Paralel  
+**Mata Kuliah:** Sistem Paralel dan Terdistribusi  
 **Tanggal:** Desember 2025  
 
 ---
@@ -1047,4 +1047,4 @@ Tanenbaum, A. S., & Van Steen, M. (2023). *Distributed Systems* (4th ed.). Maart
 
 ---
 
-**© 2025 - Laporan Tugas Akhir Sistem Terdistribusi dan Paralel**
+**© 2025 - Laporan Tugas Akhir Sistem Paralel dan Terdistribusi**
