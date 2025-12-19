@@ -3,6 +3,7 @@ Log Aggregator - Database Module
 Handles PostgreSQL connections and operations with transaction support
 """
 import asyncpg
+import json
 import logging
 from typing import Optional, List, Dict, Any, Tuple
 from datetime import datetime
@@ -30,12 +31,28 @@ class Database:
         if self.pool is not None:
             return
         
+        async def init_connection(conn):
+            """Configure JSON codec for JSONB columns"""
+            await conn.set_type_codec(
+                'jsonb',
+                encoder=json.dumps,
+                decoder=json.loads,
+                schema='pg_catalog'
+            )
+            await conn.set_type_codec(
+                'json',
+                encoder=json.dumps,
+                decoder=json.loads,
+                schema='pg_catalog'
+            )
+        
         try:
             self.pool = await asyncpg.create_pool(
                 settings.database_url,
                 min_size=settings.db_pool_min_size,
                 max_size=settings.db_pool_max_size,
-                command_timeout=60
+                command_timeout=60,
+                init=init_connection
             )
             self._connected = True
             logger.info("Database connection pool established")

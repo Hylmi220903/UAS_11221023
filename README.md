@@ -4,7 +4,7 @@ Sistem Pub-Sub log aggregator multi-service dengan **Idempotent Consumer**, **De
 
 **Nama:** Hylmi Wahyudi  
 **NIM:** 11221023  
-**Mata Kuliah:** Sistem Terdistribusi dan Paralel - B
+**Mata Kuliah:** Sistem Paralel dan Terdistribusi - B
 
 ---
 
@@ -348,7 +348,7 @@ k6 run --vus 100 --duration 5m k6/load_test.js
 
 ## 🎬 Video Demo
 
-**Link YouTube:** [Masukkan Link YouTube Unlisted/Public]
+**Link YouTube:** (https://youtu.be/sOQY6KkZVFk)
 
 Video demo mencakup:
 1. ✅ Arsitektur multi-service dan alasan desain
@@ -407,8 +407,8 @@ UAS_11221023/
 
 ## 📄 Lisensi
 
-Proyek ini dibuat untuk keperluan akademis pada mata kuliah Sistem Terdistribusi dan Paralel.
+Proyek ini dibuat untuk keperluan akademis pada mata kuliah Sistem Paralel dan Terdistribusi.
 
 ---
 
-**© 2024 - Sistem Terdistribusi dan Paralel**
+**© 2024 - Sistem Paralel dan Terdistribusi**
