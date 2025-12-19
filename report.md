@@ -3,7 +3,6 @@
 **Nama:** Hylmi Wahyudi  
 **NIM:** 11221023  
 **Mata Kuliah:** Sistem Terdistribusi dan Paralel  
-**Dosen:** [Nama Dosen]  
 **Tanggal:** Desember 2025  
 
 ---

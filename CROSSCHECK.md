@@ -30,7 +30,7 @@ Dokumen ini berisi checklist lengkap antara requirements tugas UAS dengan implem
 | 1.5 | Docker Compose wajib | ✅ | `docker-compose.yml` |
 | 1.6 | Jaringan lokal dalam Compose | ✅ | `aggregator_network` - internal |
 | 1.7 | Persistensi dengan named volumes | ✅ | `pg_data`, `broker_data` volumes |
-| 1.8 | **Video demo (YouTube unlisted/public)** | ⚠️ | **Placeholder di README - PERLU DIISI** |
+| 1.8 | **Video demo (YouTube unlisted/public)** | ✅ | Link tersedia di `report.md` |
 | 1.9 | Unit/Integration Tests 12-20 | ✅ | 20 tests di `tests/test_aggregator.py` |
 | 1.10 | Laporan format MD/PDF | ✅ | `report.md` (1052 lines) |
 | 1.11 | Sitasi APA 7th | ✅ | Setiap section T1-T10 |
@@ -259,8 +259,8 @@ tests/test_aggregator.py (532 lines)
 
 | Requirement | Status | Preparation |
 |-------------|--------|-------------|
-| Link di README/laporan | ⚠️ | **Placeholder - PERLU DIISI setelah recording** |
-| Durasi max 25 menit | ⚠️ | To be recorded |
+| Link di README/laporan | ✅ | Link tersedia di `report.md` |
+| Durasi max 25 menit | ✅ | Video sudah direkam |
 | Arsitektur dijelaskan | ✅ | Content ready in report + README |
 | docker compose up demo | ✅ | Commands documented |
 | Dedup demonstration | ✅ | Test cases + publisher ready |
@@ -301,7 +301,7 @@ tests/test_aggregator.py (532 lines)
 | report.md | ✅ | Theory + implementation (1052 lines) |
 | CROSSCHECK.md | ✅ | This document |
 | K6 load tests | ✅ | `k6/load_test.js` (211 lines) |
-| **Video link** | ⚠️ | **Placeholder in README - ACTION REQUIRED** |
+| **Video link** | ✅ | Link tersedia di `report.md` |
 
 ---
 
@@ -325,7 +325,7 @@ tests/test_aggregator.py (532 lines)
 | Tests | 7 | **7** | 20 tests complete |
 | Observability & Docs | 5 | **5** | /stats + /health + logging + README |
 
-**Total Self-Assessment: 100/100** *(pending video)*
+**Total Self-Assessment: 100/100** ✅
 
 ---
 
@@ -342,14 +342,14 @@ tests/test_aggregator.py (532 lines)
 7. **Observability**: /stats, /health, structured logging
 8. **Load testing**: K6 scripts dengan custom metrics
 
-### ⚠️ Action Required
+### ✅ Completed Actions
 
-| Priority | Item | Action |
+| Priority | Item | Status |
 |----------|------|--------|
-| **HIGH** | Video Demo | Record & upload to YouTube (unlisted/public) |
-| **HIGH** | Video Link | Update README.md dengan link YouTube |
-| MEDIUM | Test Execution | Verify all 20 tests pass dengan docker compose up |
-| LOW | K6 Test | Run full load test dan dokumentasikan hasil di report |
+| ~~HIGH~~ | Video Demo | ✅ Sudah direkam dan diupload |
+| ~~HIGH~~ | Video Link | ✅ Link sudah ditambahkan di `report.md` |
+| ~~MEDIUM~~ | Test Execution | ✅ All 20 tests passed (100%) |
+| ~~LOW~~ | K6 Test | ✅ Load test completed |
 
 ---
 
@@ -434,7 +434,7 @@ UAS_11221023/
 | Implementasi | ✅ **COMPLETE** |
 | Testing | ✅ **COMPLETE** |
 | Documentation | ✅ **COMPLETE** |
-| **Video Demo** | ⚠️ **PENDING** |
+| **Video Demo** | ✅ **COMPLETE** |
 
 ### Final Checklist Before Submission
 
@@ -443,10 +443,10 @@ UAS_11221023/
 - [x] report.md dengan T1-T10 dan sitasi APA 7th
 - [x] 20 tests tersedia dan dokumentasi cara run
 - [x] docker-compose.yml berjalan dengan `docker compose up --build`
-- [ ] **Video demo sudah direkam dan diupload**
-- [ ] **Link video sudah ditambahkan ke README.md**
+- [x] **Video demo sudah direkam dan diupload**
+- [x] **Link video sudah ditambahkan ke report.md**
 
 ---
 
-**Last Updated:** Desember 2025  
-**Status:** ✅ Implementation Complete | ⚠️ Video Demo Pending
+**Last Updated:** 19 Desember 2025  
+**Status:** ✅ All Requirements Complete
